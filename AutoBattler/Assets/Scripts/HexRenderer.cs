@@ -25,7 +25,7 @@ public class HexRenderer : MonoBehaviour
 {
     private Mesh m_mesh;
     private MeshFilter m_filter;
-    private MeshRenderer m_renderer;
+    public MeshRenderer m_renderer;
 
     private List<Face> m_faces;
 
@@ -51,9 +51,9 @@ public class HexRenderer : MonoBehaviour
         
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        DrawMesh();  
+        DrawMesh();
     }
 
 

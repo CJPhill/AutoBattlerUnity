@@ -10,24 +10,17 @@ public class HexGridLayout : MonoBehaviour
     public Vector2Int gridSize;
 
     [Header("Tile Settings")]
-    public float outerSize = 1f;
     public float innerSize = 0f;
+    public float outerSize = 1f;
     public float height = 1f;
     public bool isFlatTopped;
     public Material material;
-
-    private void OnEnable()
+    
+    private void Awake()
     {
         LayoutGrid();
     }
 
-    private void OnValidate()
-    {
-        if (Application.isPlaying)
-        {
-            LayoutGrid();
-        }
-    }
 
     private void LayoutGrid()
     {
@@ -43,10 +36,9 @@ public class HexGridLayout : MonoBehaviour
                 hexRenderer.outerSize = outerSize;
                 hexRenderer.innerSize = innerSize;
                 hexRenderer.height = height;
-                //Issues
                 hexRenderer.material = material;
+                hexRenderer.m_renderer.material = material;
                 hexRenderer.DrawMesh();
-                //Issues
                 tile.transform.SetParent(transform, true);
             }
         }
