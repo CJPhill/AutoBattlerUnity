@@ -20,12 +20,14 @@ public struct Face
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent (typeof(MeshCollider))]
 
 public class HexRenderer : MonoBehaviour
 {
     private Mesh m_mesh;
     private MeshFilter m_filter;
     public MeshRenderer m_renderer;
+    public MeshCollider m_collider;
 
     private List<Face> m_faces;
 
@@ -40,12 +42,15 @@ public class HexRenderer : MonoBehaviour
     {
         m_filter = GetComponent<MeshFilter>();
         m_renderer = GetComponent<MeshRenderer>();
+        m_collider = GetComponent<MeshCollider>();
 
         m_mesh = new Mesh();
         m_mesh.name = "Hex";
 
         m_filter.mesh = m_mesh;
         m_renderer.material = material;
+
+        m_collider.sharedMesh = m_mesh;
 
 
         

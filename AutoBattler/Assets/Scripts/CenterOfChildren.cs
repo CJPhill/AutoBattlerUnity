@@ -12,7 +12,7 @@ public class CenterOfChildren : MonoBehaviour
         Vector3 center = CalculateCenterOfChildren();
 
         // Log the result (you can use it for whatever you need)
-        Debug.Log("Center of Children: " + center);
+       //Debug.Log("Center of Children: " + center);
     }
 
     Vector3 CalculateCenterOfChildren()
