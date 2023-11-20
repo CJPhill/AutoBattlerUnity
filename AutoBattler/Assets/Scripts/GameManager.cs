@@ -1,20 +1,47 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    //CharacterSpace
+    public GameObject selectionTable;
+    public List<GameObject> selections;
 
 
-    // Start is called before the first frame update
-    void Start()
+    //HexGrid
+    public GameObject HexMap;
+
+    //Scripts
+    public Draggable draggable;
+
+
+
+
+    private void Update()
     {
-        
+        //GridShow();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GridShow()
     {
-        
+        if (draggable.isDragging == true)
+        {
+            HexMap.SetActive(true);
+        }
+        else
+        {
+            HexMap.SetActive(false);
+        }
+
+
+            
     }
+
+
+
+
+   
 }

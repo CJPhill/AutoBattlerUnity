@@ -14,12 +14,15 @@ public class HexGridLayout : MonoBehaviour
     public float outerSize = 1f;
     public float height = 1f;
     public bool isFlatTopped;
-    public Material material;
+    public Material idlematerial;
+    public Material selectedMaterial;
     
     private void Awake()
     {
         LayoutGrid();
     }
+
+    
 
 
     private void LayoutGrid()
@@ -36,8 +39,9 @@ public class HexGridLayout : MonoBehaviour
                 hexRenderer.outerSize = outerSize;
                 hexRenderer.innerSize = innerSize;
                 hexRenderer.height = height;
-                hexRenderer.material = material;
-                hexRenderer.m_renderer.material = material;
+                hexRenderer.idleMaterial = idlematerial;
+                hexRenderer.selectedMaterial = selectedMaterial;
+                hexRenderer.m_renderer.material = idlematerial;
                 hexRenderer.DrawMesh();
                 tile.transform.SetParent(transform, true);
             }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,12 +32,16 @@ public class HexRenderer : MonoBehaviour
 
     private List<Face> m_faces;
 
-    public Material material;
+    public Material idleMaterial;
+    public Material selectedMaterial;
 
     public float innerSize;
     public float outerSize;
     public float height;
     public bool isFlatTopped;
+    [SerializeField]
+    private bool isSelected = false;
+    private int hexGridLayer;
 
     private void Awake()
     {
@@ -48,17 +53,24 @@ public class HexRenderer : MonoBehaviour
         m_mesh.name = "Hex";
 
         m_filter.mesh = m_mesh;
-        m_renderer.material = material;
+        m_renderer.material = idleMaterial;
 
         m_collider.sharedMesh = m_mesh;
+        m_collider.convex = true;
+
+        hexGridLayer = LayerMask.NameToLayer("HexGrid");
+        gameObject.layer = hexGridLayer;
 
 
-        
+
+
     }
 
     private void Update()
     {
         DrawMesh();
+        if (isSelected) { m_renderer.material = selectedMaterial; }
+        else { m_renderer.material = idleMaterial;}
     }
 
 
@@ -145,4 +157,21 @@ public class HexRenderer : MonoBehaviour
         return new Vector3((size * Mathf.Cos(angle_rad)), height, size * Mathf.Sin(angle_rad));
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Unit"))
+        {
+            isSelected = true;
+            Debug.Log("woah");
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Unit"))
+        {
+            isSelected = false;
+        }
+    }
 }
